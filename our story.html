@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story - Vultures</title>
+    <style>
+        :root {
+            --primary: #144734;       /* Dark green */
+            --secondary: #ffc51a;     /* Yellow */
+            --text-dark: #333;
+            --text-light: #fff;
+            --bg-light: #f8f8f8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-light);
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            color: var(--secondary);
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: 
+                linear-gradient(rgba(20, 71, 52, 0.7), rgba(20, 71, 52, 0.7)), 
+                url('images/cchhh.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-align: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            color: var(--secondary);
+        }
+        
+        .hero-content p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Story Sections */
+        .story-section {
+            padding: 100px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--primary);
+            font-size: 36px;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 15px auto 0;
+        }
+        
+        .story-block {
+            display: flex;
+            align-items: center;
+            margin-bottom: 100px;
+            gap: 60px;
+        }
+        
+        .story-block.reverse {
+            flex-direction: row-reverse;
+        }
+        
+        .story-text {
+            flex: 1;
+        }
+        
+        .story-image {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .story-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .story-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .story-text h2 {
+            font-size: 32px;
+            margin-bottom: 25px;
+            color: var(--primary);
+        }
+        
+        .story-text p {
+            margin-bottom: 25px;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        
+        /* Quote Section */
+        .quote-section {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 120px 40px;
+            text-align: center;
+            margin: 80px 0;
+        }
+        
+        .quote {
+            font-size: 32px;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .quote:before, .quote:after {
+            content: '"';
+            color: var(--secondary);
+            font-size: 40px;
+            opacity: 0.7;
+        }
+        
+        .quote-author {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--secondary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 60px 40px 30px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 30px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero {
+                height: 70vh;
+            }
+            
+            .hero-content h1 {
+                font-size: 42px;
+            }
+            
+            .story-block {
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            nav ul li {
+                margin-left: 0;
+            }
+            
+            .hero {
+                height: 60vh;
+            }
+            
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .hero-content p {
+                font-size: 18px;
+            }
+            
+            .story-block {
+                flex-direction: column;
+                margin-bottom: 60px;
+            }
+            
+            .story-block.reverse {
+                flex-direction: column;
+            }
+            
+            .story-image {
+                margin-top: 30px;
+            }
+            
+            .quote {
+                font-size: 24px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">Vultures</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                
+                <li><a href="our story.html">Our Story</a></li>
+                <li><a href="drinks.html">Drinks</a></li>
+                <li><a href="https://www.champagne.fr/en/about-champagne/how-champagne-is-made">Exploration</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Our Story</h1>
+            <p>The journey from neural networks to grapevines</p>
+        </div>
+    </section>
+    
+    <section class="story-section">
+        <h2 class="section-title">The Vulture Legacy</h2>
+        
+        <div class="story-block">
+            <div class="story-text">
+                <h2>The Beginning</h2>
+                <p>In a past life, Julien Mercier was a systems architect known for pioneering neural mesh interfaces in the late 2030s. He wasn't famous, but his inventions shaped the tools that now run quietly in the background of everyday life.</p>
+                <p>After two decades of rat race—early mornings, late trains, and the constant hum of server racks—Julien stepped away, not with billions, but enough to chase something quieter, something slower.</p>
+            </div>
+            <div class="story-image">
+                <img src="images/visite-en-champagne.webp" alt="Julien Mercier in Champagne">
+            </div>
+        </div>
+        
+        <div class="story-block reverse">
+            <div class="story-text">
+                <h2>A New Vision</h2>
+                <p>He moved to Champagne with a modest sum and a question: what if the same precision and elegance that shaped the future of computing could shape something far older—something rooted in nature but could keep up with the time, with progress?</p>
+                <p>What if technology could serve tradition, rather than replace it?</p>
+            </div>
+            <div class="story-image">
+                <img src="images/champagne tasting.jpg" alt="Champagne tasting">
+            </div>
+        </div>
+        
+        <div class="story-block">
+            <div class="story-text">
+                <h2>Building Vulture</h2>
+                <p>He bought ten hectares and began again, not as an engineer, but as a student. He walked the rows, tasted the soil, and listened. He started to build not just a vineyard, but a new kind of conversation between craft and code.</p>
+                <p>From the beginning, Vulture was never meant to follow tradition. Named after the bird that sees what others miss, Vulture is about clarity, renewal, and the beauty of restraint.</p>
+            </div>
+            <div class="story-image">
+                <img src="images/vulture rose.jpg" alt="Vulture champagne label">
+            </div>
+        </div>
+    </section>
+    
+    <section class="quote-section">
+        <div class="quote">At Vulture, we believe the beauty of tradition isn't about excess. It's about intention. It's about designing a life—and a bottle—with purpose.</div>
+        <div class="quote-author">Khoi, Founder</div>
+    </section>
+    
+    <section class="story-section">
+        <div class="story-block reverse">
+            <div class="story-text">
+                <h2>The Philosophy</h2>
+                <p>Julien's goal was simple: to reintroduce Champagne to a generation that had never truly been invited in. To strip away the velvet rope, the golden labels, and show that beauty lies not in extravagance, but in balance, in simplicity, and in a glass shared without occasion.</p>
+                <p>Every element, from the architecture to the process, speaks in a quiet, intentional language.</p>
+            </div>
+            <div class="story-image">
+                <img src="images/champagne region.jpg" alt="Champagne region">
+            </div>
+        </div>
+        
+        <div class="story-block">
+            <div class="story-text">
+                <h2>The Future</h2>
+                <p>Today, Vulture stands as a testament to what happens when technology and tradition meet not as competitors, but as collaborators. Our vineyards blend ancient wisdom with modern precision, creating champagnes that honor the past while embracing the future.</p>
+                <p>Vulture: The beauty of what came before.</p>
+            </div>
+            <div class="story-image">
+                <img src="images/grapes.jpg" alt="Vulture champagne grapes">
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-logo">Vultures</div>
+        <div class="footer-links">
+            <a href="contact.html">Contact</a>
+           
+            <a href="https://www.vinetsociete.fr/consommation-responsable/">Responsible Consumption</a>
+        </div>
+        <div class="copyright">© 2050 Vultures. All rights reserved.</div>
+    </footer>
+</body>
+</html>

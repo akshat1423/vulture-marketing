@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Vultures</title>
+    <style>
+        :root {
+            --primary: #144734;       /* Dark green */
+            --secondary: #ffc51a;     /* Yellow */
+            --text-dark: #333;
+            --text-light: #fff;
+            --bg-light: #f8f8f8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            color: var(--secondary);
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Hero Contact Section */
+        .contact-hero {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+        }
+        
+        .contact-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .contact-hero-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(20, 71, 52, 0.7);
+            color: var(--text-light);
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .contact-hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .contact-hero-content p {
+            font-size: 20px;
+            max-width: 800px;
+            margin-bottom: 40px;
+        }
+        
+        /* Contact Info Section */
+        .contact-info {
+            display: flex;
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 40px;
+            gap: 60px;
+        }
+        
+        .contact-card {
+            flex: 1;
+            background-color: var(--bg-light);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .contact-card h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .contact-card h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .contact-details {
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            color: var(--secondary);
+            font-size: 20px;
+            margin-right: 15px;
+            margin-top: 3px;
+        }
+        
+        .contact-text h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .contact-text p, .contact-text a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-text a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Business Contact Section */
+        .business-contact {
+            background-color: var(--primary);
+            padding: 80px 40px;
+            color: var(--text-light);
+        }
+        
+        .business-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .business-image {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .business-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .business-content {
+            flex: 1;
+        }
+        
+        .business-content h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .business-content p {
+            margin-bottom: 30px;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: rgba(255,255,255,0.9);
+        }
+        
+        .contact-form button {
+            background-color: var(--secondary);
+            color: var(--primary);
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .contact-form button:hover {
+            background-color: #e6b117;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 60px 40px 30px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 30px;
+        }
+        
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        
+        .chatbot-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .chatbot-button:hover {
+            background-color: #0d3528;
+            transform: translateY(-3px);
+        }
+        
+        .chatbot-window {
+            display: none;
+            width: 350px;
+            height: 500px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+            flex-direction: column;
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+        }
+        
+        .chatbot-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        
+        .bot-message {
+            background-color: #f1f1f1;
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            max-width: 80%;
+        }
+        
+        .user-message {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            max-width: 80%;
+            align-self: flex-end;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+        
+        .chatbot-input button {
+            padding: 10px 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .contact-info {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .business-container {
+                flex-direction: column;
+            }
+            
+            .business-image {
+                order: -1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            nav ul li {
+                margin-left: 0;
+            }
+            
+            .contact-hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .contact-hero-content p {
+                font-size: 18px;
+            }
+            
+            .contact-info {
+                padding: 0 20px;
+                margin: 60px auto;
+            }
+            
+            .business-contact {
+                padding: 60px 20px;
+            }
+            
+            .chatbot-window {
+                width: 300px;
+                right: 10px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Vultures</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                
+                <li><a href="our story.html">Our Story</a></li>
+                <li><a href="drinks.html">Drinks</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="contact-hero">
+        <img src="images/house.jpg" alt="Jágermeijter House">
+        <div class="contact-hero-content">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you. Reach out with questions, business inquiries, or just to say hello.</p>
+        </div>
+    </section>
+    
+    <section class="contact-info">
+        <div class="contact-card">
+            <h2>General Inquiries</h2>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Address</h3>
+                        <p>123 Champagne Avenue<br>Épernay, France 51200</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Phone</h3>
+                        <p>+33 0775790656</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Email</h3>
+                        <a href="mailto:champagnevulture@gmail.com">champagnevulture.com</a>
+
+                        <div class="social-icons">
+                            <a href="https://facebook.com" target="_blank" class="social-icon">
+                                <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" width="40">
+                            </a>
+                            <a href="https://instagram.com" target="_blank" class="social-icon">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="40">
+                            </a>
+                            <a href="https://x.com" target="_blank" class="social-icon">
+                                <img src="images/x.png" alt="X (Twitter)" width="40">
+                            </a>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-card">
+            <h2>Visitor Information</h2>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Tasting Room Hours</h3>
+                        <p>Monday - Friday: 10am - 6pm<br>Saturday: 11am - 5pm<br>Sunday: Closed</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Tours</h3>
+                        <p>Available by appointment<br>Groups of 5 or more require<br>48 hours notice</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-wine-glass-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Tastings</h3>
+                        <p>€30 per person<br>Groups of 5 or more €10% Discount<br>Reservations recommended</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="business-contact">
+        <div class="business-container">
+            <div class="business-image">
+                <img src="images/busiuness.jpg" alt="Business Meeting">
+            </div>
+            
+            <div class="business-content">
+                <h2>Business Inquiries</h2>
+                <p>Interested in carrying Vultures in your establishment? Our team would be happy to discuss wholesale opportunities, partnerships, and distribution options.</p>
+                <form class="contact-form" action="mailto:champagnevulture@gmail.com" method="post" enctype="text/plain">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <input type="text" name="company" placeholder="Company Name">
+                    <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-logo">Vultures</div>
+        <div class="footer-links">
+            <a href="contact.html">Contact</a>
+            
+            
+            <a href="https://www.vinetsociete.fr/consommation-responsable/">Responsible Consumption</a>
+        </div>
+        <div class="copyright">© 2050 Vultures. All rights reserved.</div>
+    </footer>
+    
+    <!-- AI Chatbot Widget -->
+    <div class="chatbot-container">
+        <button id="chatbot-toggle" class="chatbot-button">
+            <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" alt="AI Assistant" width="30">
+            AI Assistant
+        </button>
+        <div id="chatbot-window" class="chatbot-window">
+            <div class="chatbot-header">
+                <h3>Champagne AI Assistant</h3>
+                <button id="chatbot-close" class="close-btn">&times;</button>
+            </div>
+            <div id="chatbot-messages" class="chatbot-messages">
+                <div class="bot-message">Hello! How can I help you with Champagne today?</div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="user-input" placeholder="Type your question...">
+                <button id="send-message">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chatbot functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatbotToggle = document.getElementById('chatbot-toggle');
+            const chatbotWindow = document.getElementById('chatbot-window');
+            const chatbotClose = document.getElementById('chatbot-close');
+            const sendButton = document.getElementById('send-message');
+            const userInput = document.getElementById('user-input');
+            const chatMessages = document.getElementById('chatbot-messages');
+            
+            // Toggle chatbot window
+            chatbotToggle.addEventListener('click', function() {
+                chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+            });
+            
+            // Close chatbot
+            chatbotClose.addEventListener('click', function() {
+                chatbotWindow.style.display = 'none';
+            });
+            
+            // Send message
+            function sendMessage() {
+                const message = userInput.value.trim();
+                if (message) {
+                    // Add user message
+                    const userMessage = document.createElement('div');
+                    userMessage.className = 'user-message';
+                    userMessage.textContent = message;
+                    chatMessages.appendChild(userMessage);
+                    
+                    // Clear input
+                    userInput.value = '';
+                    
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    
+                    // Simulate bot response
+                    setTimeout(() => {
+                        const botResponse = document.createElement('div');
+                        botResponse.className = 'bot-message';
+                        botResponse.textContent = getBotResponse(message);
+                        chatMessages.appendChild(botResponse);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 1000);
+                }
+            }
+            
+            // Simple response logic
+            function getBotResponse(message) {
+                const lowerMessage = message.toLowerCase();
+                
+                if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+                    return "Hello there! How can I assist you with Champagne today?";
+                } else if (lowerMessage.includes('contact') || lowerMessage.includes('email')) {
+                    return "You can reach us at info@jagermeijter.com or call +33 1 23 45 67 89 during business hours.";
+                } else if (lowerMessage.includes('visit') || lowerMessage.includes('tour')) {
+                    return "Our tasting room is open Monday-Friday 10am-6pm and Saturday 11am-5pm. Tours are available by appointment.";
+                } else if (lowerMessage.includes('price') || lowerMessage.includes('cost')) {
+                    return "Our tasting experience starts at €25 per person. For specific product pricing, please contact our sales team.";
+                } else {
+                    return "Thank you for your question! For more detailed information, please visit our website or contact us directly.";
+                }
+            }
+            
+            // Send message on button click or Enter key
+            sendButton.addEventListener('click', sendMessage);
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

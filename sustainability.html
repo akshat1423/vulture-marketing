@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainability | Vultures Champagne</title>
+    <style>
+        :root {
+            --primary: #144734;
+            --secondary: #ffc51a;
+            --text-light: #f8f8f8;
+            --text-dark: #333;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+        
+        nav a:hover {
+            color: var(--secondary);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(20, 71, 52, 0.7), rgba(20, 71, 52, 0.7)), 
+                        url('https://images.unsplash.com/photo-1510812431401-41e2f9a9c6c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--text-light);
+            padding: 10rem 2rem 6rem;
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--secondary);
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .subsection {
+            margin-bottom: 4rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .subsection.reverse {
+            flex-direction: row-reverse;
+        }
+        
+        .subsection-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .subsection-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .subsection-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .subsection-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .subsection-title {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .subsection-title:before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: var(--secondary);
+            margin-right: 15px;
+            border-radius: 50%;
+        }
+        
+        .highlight-box {
+            background-color: rgba(255, 197, 26, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .certification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .certification-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        
+        .certification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .certification-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 1.5rem;
+        }
+        
+        .certification-card h4 {
+            color: var(--primary);
+            margin-top: 0;
+            font-size: 1.2rem;
+        }
+        
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .gallery-item {
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: var(--text-light);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+                flex-direction: column;
+                position: relative;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                gap: 1rem;
+            }
+            
+            .hero {
+                padding: 8rem 1rem 4rem;
+                min-height: auto;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 3rem 1rem;
+            }
+            
+            .subsection, .subsection.reverse {
+                flex-direction: column;
+            }
+            
+            .subsection-image {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Vultures</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="our story.html">OUR STORY</a></li>
+                <li><a href="drinks.html">DRINKS</a></li>
+                <li><a href="https://www.champagne.fr/en/about-champagne/how-champagne-is-made">EXPLORATION</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <h1>Sustainability & Innovation</h1>
+        <p>A Future-Forward Champagne Estate</p>
+    </section>
+    
+    <section class="section">
+        <h2 class="section-title">Our Sustainable Practices</h2>
+        
+        <div class="subsection">
+            <div class="subsection-content">
+                <h3 class="subsection-title">Bottle Recycling & Sourcing</h3>
+                <p><strong>Sustainable Glass Bottles:</strong> We use high-quality glass with a matte finish, reducing environmental impact while maintaining a premium aesthetic.</p>
+                
+                <div class="highlight-box">
+                    <h4>Bottle Collection Program:</h4>
+                    <ul>
+                        <li>Customers return empty bottles through a deposit system.</li>
+                        <li>Options: Refill, trade-in for another product line (introducing consumers to a diverse range or premium selections).</li>
+                        <li>Challenge: Some customers may want to keep bottles as collectibles.</li>
+                    </ul>
+                    
+                    <h4>Recycling Process:</h4>
+                    <ul>
+                        <li>Clean and reuse viable bottles.</li>
+                        <li>Break down unusable bottles to produce new ones.</li>
+                        <li>All processes handled in-house, reinforcing our identity as a high-tech, eco-friendly vineyard.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="subsection-image">
+                <img src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Glass bottle recycling">
+            </div>
+        </div>
+        
+        <div class="subsection reverse">
+            <div class="subsection-content">
+                <h3 class="subsection-title">Sustainable Pesticide & Land Productivity Management</h3>
+                <p><strong>AI-Driven Grape Quota Management:</strong></p>
+                <ul>
+                    <li>Maintain a comprehensive database to track land productivity and optimize vineyard management.</li>
+                    <li>AI-powered yield prediction prevents overproduction and ensures sustainable resource allocation.</li>
+                    <li>Since vineyards are relatively inelastic (taking years to mature), AI will identify parcels best suited for cultivation while others undergo natural restoration.</li>
+                </ul>
+                
+                <p><strong>Precision Pesticide Application:</strong></p>
+                <ul>
+                    <li>AI-integrated robotic sprayers (e.g., Ecorobotix ARA or equivalent) apply targeted pesticide only where needed, reducing chemical usage by up to 90%.</li>
+                    <li>Drones monitor plant health, ensuring early detection of pest threats and minimizing intervention needs.</li>
+                </ul>
+            </div>
+            <div class="subsection-image">
+                <img src="https://images.unsplash.com/photo-1515703407324-8ae40c1ee34e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Vineyard management">
+            </div>
+        </div>
+        
+        <div class="image-gallery">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1515703407324-8ae40c1ee34e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Vineyard drone view">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1519817650390-64a93db51149?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Grape harvesting">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Wine cellar">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1515703407324-8ae40c1ee34e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sustainable farming">
+            </div>
+        </div>
+        
+        <div class="subsection">
+            <div class="subsection-content">
+                <h3 class="subsection-title">Smart Labels & Traceability</h3>
+                <p><strong>Blockchain-Powered Authenticity:</strong></p>
+                <ul>
+                    <li>QR codes linked to blockchain-stored data track the vineyard's entire lifecycle from grape harvest to bottling.</li>
+                    <li>Consumers access origin details, sustainability metrics, and carbon footprint data.</li>
+                </ul>
+                
+                <p><strong>AI-Enhanced Personalization:</strong></p>
+                <ul>
+                    <li>Labels interact with personalized digital experiences, recommending food pairings and storage tips via AR (Augmented Reality) interfaces.</li>
+                </ul>
+            </div>
+            <div class="subsection-image">
+                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Smart label technology">
+            </div>
+        </div>
+        
+        <div class="subsection reverse">
+            <div class="subsection-content">
+                <h3 class="subsection-title">Adaptive Cellars for Energy Efficiency</h3>
+                <p><strong>Dynamic Climate Control:</strong></p>
+                <ul>
+                    <li>AI-powered self-regulating cellars (e.g., Thermovault AI) adjust humidity and temperature in real time, optimizing fermentation and aging conditions.</li>
+                    <li>Uses geothermal cooling and solar-powered storage to reduce energy consumption by 40%.</li>
+                </ul>
+                
+                <p><strong>Automated Inventory Management:</strong></p>
+                <ul>
+                    <li>RFID-tagged barrels/bottles linked to an AI inventory system predict demand, ensuring efficient stock turnover and reducing waste.</li>
+                </ul>
+            </div>
+            <div class="subsection-image">
+                <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Wine cellar technology">
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" style="background-color: #f9f9f9;">
+        <h2 class="section-title">Achieving Sustainability Certifications</h2>
+        
+        <div class="certification-grid">
+            <div class="certification-card">
+                <img src="images/EU logo.jpg" alt="EU Organic Logo">
+                <h4>Organic Agriculture Certification (EU Organic)</h4>
+                <p>Ensures no synthetic chemicals or GMOs</p>
+            </div>
+            <div class="certification-card">
+                <img src="images/demeter.jpg" alt="Demeter Logo">
+                <h4>Demeter (Biodynamic Certification)</h4>
+                <p>Holistic farming with natural cycles</p>
+            </div>
+            <div class="certification-card">
+                <img src="images/HVE.jpg" alt="HVE Logo">
+                <h4>Haute Valeur Environnementale (HVE)</h4>
+                <p>High environmental value certification focusing on biodiversity and resource management</p>
+            </div>
+            <div class="certification-card">
+                <img src="images/B.jpg" alt="B Corp Logo">
+                <h4>B Corp Certification</h4>
+                <p>Verifies social and environmental responsibility</p>
+            </div>
+            <div class="certification-card">
+                <img src="images/ISO.jpg" alt="ISO 14001 Logo">
+                <h4>ISO 14001</h4>
+                <p>International standard for environmental management</p>
+            </div>
+        </div>
+        
+        <h3 style="margin-top: 4rem; text-align: center; font-size: 1.8rem; color: var(--primary);">Vultures UN Sustainable Development Goals (SDGs) Alignment</h3>
+        <div class="highlight-box" style="max-width: 800px; margin: 2rem auto;">
+            <p><strong>Goal 12: Responsible Consumption & Production</strong> - Bottle recycling program, AI-driven production efficiency.</p>
+            <p><strong>Goal 13: Climate Action</strong> - Reduced pesticide use, geothermal and solar-powered operations.</p>
+            <p><strong>Goal 15: Life on Land</strong> - AI-assisted vineyard restoration and biodiversity conservation.</p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem;">
+            <img src="images/sdgs.jpg" alt="UN SDGs" style="max-width: 600px; width: 100%; height: auto;">
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Vultures Champagne</h3>
+                <p>Innovating sustainable champagne production through technology and tradition.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="index.html" style="color: var(--text-light); text-decoration: none;">Home</a></li>
+                    <li><a href="our story.html" style="color: var(--text-light); text-decoration: none;">Our Story</a></li>
+                    <li><a href="sustainability.html" style="color: var(--text-light); text-decoration: none;">Sustainability</a></li>
+                    <li><a href="contact.html" style="color: var(--text-light); text-decoration: none;">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p>champagnevulture@gmail.com</p>
+                <p>+33 0775790656</p>
+                <div class="social-links">
+                    <a href="https://instagram.com" target="_blank" class="social-icon"></a>
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="40">
+                    
+                    <a href="https://facebook.com" target="_blank" class="social-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" width="40">
+
+                    <a href="https://x.com" target="_blank" class="social-icon"></a>
+                    <img src="images/x.png" alt="X (Twitter)" width="40">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2050 Vultures Champagne. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

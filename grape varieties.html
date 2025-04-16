@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grape Varieties | VULTURES</title>
+    <style>
+        :root {
+            --primary: #144734;       /* Dark green */
+            --secondary: #ffc51a;     /* Yellow */
+            --text-dark: #333;
+            --text-light: #fff;
+            --bg-light: #f8f8f8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            color: var(--secondary);
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            padding: 15px 40px;
+            background-color: rgba(20, 71, 52, 0.9);
+            color: var(--secondary);
+            font-size: 14px;
+        }
+        
+        .breadcrumb a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .breadcrumb a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Hero Section */
+        .grape-hero {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            overflow: hidden;
+        }
+        
+        .grape-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(20, 71, 52, 0.7);
+            color: var(--text-light);
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            text-transform: uppercase;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+        }
+        
+        /* Main Content */
+        .content-section {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 40px;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+        }
+        
+        .intro-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 60px;
+        }
+        
+        /* Grape Varieties Grid */
+        .grape-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .grape-card {
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .grape-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .grape-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .grape-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .grape-card:hover .grape-image img {
+            transform: scale(1.1);
+        }
+        
+        .grape-content {
+            padding: 30px;
+        }
+        
+        .grape-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .grape-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .grape-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        /* Terroir Section */
+        .terroir-section {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 100px 40px;
+            margin: 80px 0;
+        }
+        
+        .terroir-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .terroir-image {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .terroir-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .terroir-content {
+            flex: 1;
+        }
+        
+        .terroir-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .terroir-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 60px 40px 30px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 30px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .terroir-container {
+                flex-direction: column;
+            }
+            
+            .terroir-image {
+                order: -1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            nav ul li {
+                margin-left: 0;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .content-section {
+                padding: 0 20px;
+                margin: 60px auto;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .grape-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">VULTURES</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                
+                <li><a href="our story.html">Our Story</a></li>
+                <li><a href="grape varieties.html">Grape Varieties</a></li>
+                <li><a href="https://www.champagne.fr/en/about-champagne/how-champagne-is-made">Exploration</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    
+    
+    <section class="grape-hero">
+        <video src="images/THE 15 BEST TYPES OF GRAPES.mp4" autoplay loop muted playsinline width="1400"></video>
+        <div class="hero-content">
+            <h1>Grape Varieties</h1>
+            <p>The essence of VULTURES champagne lies in our carefully selected grapes, each contributing unique characteristics to our distinctive blends.</p>
+        </div>
+    </section>
+    
+    <section class="content-section">
+        <h2 class="section-title">The Grapes of VULTURES</h2>
+        <p class="intro-text">
+            VULTURES champagne is crafted from the noble grape varieties of the Champagne region, each bringing its own personality to our creations. 
+            Our winemakers skillfully blend these varieties to achieve the perfect balance of freshness, complexity, and elegance that defines the VULTURES style.
+        </p>
+        
+        <div class="grape-grid">
+            <div class="grape-card">
+                <div class="grape-image">
+                    <img src="images/Pinot Noir.jpg" alt="Pinot Noir Grapes">
+                </div>
+                <div class="grape-content">
+                    <h3>Pinot Noir</h3>
+                    <p>
+                        The backbone of VULTURES champagnes, Pinot Noir provides structure, body, and aromatic complexity. 
+                        Our vineyards in the Montagne de Reims produce Pinot Noir with remarkable depth and aging potential.
+                    </p>
+                    <div class="grape-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">38%</div>
+                            <div class="stat-label">Of our vineyards</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">10-15</div>
+                            <div class="stat-label">Years aging</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">Red</div>
+                            <div class="stat-label">Fruit notes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grape-card">
+                <div class="grape-image">
+                    <img src="images/Chardonnay.jpg" alt="Chardonnay Grapes">
+                </div>
+                <div class="grape-content">
+                    <h3>Chardonnay</h3>
+                    <p>
+                        The only white grape in our blends, Chardonnay brings finesse, minerality, and vibrant acidity. 
+                        Our Côte des Blancs Chardonnay is renowned for its citrus and floral characteristics.
+                    </p>
+                    <div class="grape-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">32%</div>
+                            <div class="stat-label">Of our vineyards</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">5-8</div>
+                            <div class="stat-label">Years aging</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">Citrus</div>
+                            <div class="stat-label">Dominant notes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grape-card">
+                <div class="grape-image">
+                    <img src="images/Meunier.jpg" alt="Pinot Meunier Grapes">
+                </div>
+                <div class="grape-content">
+                    <h3>Pinot Meunier</h3>
+                    <p>
+                        The secret weapon in VULTURES blends, Pinot Meunier adds fruitiness, roundness, and approachability. 
+                        Grown in the Vallée de la Marne, it brings immediate charm to our younger champagnes.
+                    </p>
+                    <div class="grape-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">30%</div>
+                            <div class="stat-label">Of our vineyards</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">3-5</div>
+                            <div class="stat-label">Years aging</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">Tropical</div>
+                            <div class="stat-label">Fruit profile</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="terroir-section">
+        <div class="terroir-container">
+            <div class="terroir-content">
+                <h2>The VULTURES Terroir</h2>
+                <p>
+                    Our grapes thrive in the unique chalky soils of Champagne, which provide excellent drainage and impart distinctive mineral characteristics to our wines. 
+                    The cool climate ensures slow, even ripening, preserving acidity while developing complex flavors.
+                </p>
+                <p>
+                    Each vineyard parcel is carefully tended by our growers, many of whom have worked with the VULTURES house for generations. 
+                    This partnership ensures the highest quality fruit that truly expresses our terroir.
+                </p>
+            </div>
+            <div class="terroir-image">
+                <img src="images/shamba.jpeg">
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section">
+        <h2 class="section-title">The Art of Blending</h2>
+        <p class="intro-text">
+            The magic of VULTURES champagne lies in our masterful blending of these three grape varieties. 
+            Each year, our cellar master tastes hundreds of base wines to create the perfect assemblage that will become the signature VULTURES style.
+        </p>
+        
+        <div class="grape-grid">
+            <div class="grape-card">
+                <div class="grape-image">
+                    <img src="images/classic.jpg" alt="VULTURES Blend">
+                </div>
+                <div class="grape-content">
+                    <h3>Classic Blend</h3>
+                    <p>
+                        Our signature non-vintage blend combines approximately 40% Pinot Noir, 35% Chardonnay, and 25% Pinot Meunier, 
+                        creating a perfectly balanced champagne with both power and elegance.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="grape-card">
+                <div class="grape-image">
+                    <img src="images/blank.jpg .jpg" alt="Blanc de Blancs">
+                </div>
+                <div class="grape-content">
+                    <h3>Blanc de Blancs</h3>
+                    <p>
+                        Made exclusively from Chardonnay, this prestige cuvée showcases the purity and finesse of our finest white grapes, 
+                        with extended aging on the lees for added complexity.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="grape-card">
+                <div class="grape-image">
+                    <img src="https://images.unsplash.com/photo-1601584115167-51895d6d5e2a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Rosé">
+                </div>
+                <div class="grape-content">
+                    <h3>Rosé</h3>
+                    <p>
+                        Our rosé champagne blends Pinot Noir and Chardonnay with a small addition of still red wine from our oldest Pinot Noir vines, 
+                        creating a champagne with remarkable depth and berry flavors.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-logo">VULTURES</div>
+        <div class="footer-links">
+            <a href="contact.html">Contact</a>
+            
+            <a href="https://www.vinetsociete.fr/consommation-responsable/">Responsible Consumption</a>
+        </div>
+        <div class="copyright">© 2050 VULTURES. All rights reserved.</div>
+    </footer>
+</body>
+</html>

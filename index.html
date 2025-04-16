@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VULTURES | Exploration</title>
+    <style>
+        :root {
+            --primary: #144734;       /* Dark green */
+            --secondary: #fff6ea;     /* Pastel Pink */
+            --text-dark: #333;
+            --text-light: #fff;
+            --bg-light: #f8f8f8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        /* Age Verification Modal */
+        .age-verification {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-light);
+            z-index: 9999;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .age-verification h1 {
+            color: var(--secondary);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .age-verification p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 10px;
+        }
+        
+        .age-verification h2 {
+            font-size: 2rem;
+            margin: 30px 0;
+            color: var(--secondary);
+            text-transform: uppercase;
+        }
+        
+        .age-verification-buttons {
+            margin: 30px 0;
+            display: flex;
+            gap: 20px;
+        }
+        
+        .age-verification button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+        
+        .age-verification button:first-child {
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+        
+        .age-verification button:last-child {
+            background-color: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--text-light);
+        }
+        
+        .age-verification button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo-img {
+            height: 60px;
+            width: auto;
+        }
+        
+        .logo-text {
+            color: var(--secondary);
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            padding: 15px 40px;
+            background-color: rgba(20, 71, 52, 0.9);
+            color: var(--secondary);
+            font-size: 14px;
+        }
+        
+        .breadcrumb a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .breadcrumb a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Exploration Hero Section */
+        .exploration-hero {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            overflow: hidden;
+        }
+        
+        .exploration-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 60px 40px;
+            background: linear-gradient(transparent, rgba(20, 71, 52, 0.9));
+            color: var(--text-light);
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            text-transform: uppercase;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .grid-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .grid-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .grid-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .grid-content {
+            padding: 20px;
+            background-color: var(--bg-light);
+        }
+        
+        .grid-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .grid-content p {
+            margin-bottom: 15px;
+        }
+        
+        .read-more {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .read-more:after {
+            content: '→';
+            margin-left: 5px;
+            transition: margin-left 0.3s;
+        }
+        
+        .read-more:hover:after {
+            margin-left: 10px;
+        }
+        
+        /* Full Width Section */
+        .full-width-section {
+            position: relative;
+            height: 60vh;
+            margin: 80px 0;
+        }
+        
+        .full-width-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .full-width-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(20, 71, 52, 0.7);
+            color: var(--text-light);
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .full-width-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .full-width-content p {
+            max-width: 800px;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--secondary);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #e6b117;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 60px 40px 30px;
+            text-align: center;
+        }
+        
+        .footer-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo-img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .footer-logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--secondary);
+            letter-spacing: 1px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 30px;
+        }
+        
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        
+        .chatbot-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .chatbot-button:hover {
+            background-color: #0d3528;
+            transform: translateY(-3px);
+        }
+        
+        .chatbot-window {
+            display: none;
+            width: 350px;
+            height: 500px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+            flex-direction: column;
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+        }
+        
+        .chatbot-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        
+        .bot-message {
+            background-color: #f1f1f1;
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            max-width: 80%;
+        }
+        
+        .user-message {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            max-width: 80%;
+            align-self: flex-end;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+        
+        .chatbot-input button {
+            padding: 10px 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+            }
+            
+            .logo-container {
+                margin-bottom: 15px;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            nav ul li {
+                margin-left: 0;
+            }
+            
+            .hero-content {
+                padding: 40px 20px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 60px 20px;
+            }
+            
+            .full-width-content h2 {
+                font-size: 2rem;
+            }
+            
+            .chatbot-window {
+                width: 300px;
+                right: 10px;
+            }
+            
+            .age-verification h1 {
+                font-size: 2rem;
+            }
+            
+            .age-verification h2 {
+                font-size: 1.5rem;
+            }
+            
+            .age-verification-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Age Verification Modal -->
+    <div class="age-verification" id="ageVerification">
+        <h1>Welcome to the official website of VULTURES</h1>
+        <p>To access the site, you must be of drinking age according to the legislation in force in your place of residence, or be at least 18 years old.</p>
+        <h2>ARE YOU OF LEGAL AGE?</h2>
+        <div class="age-verification-buttons">
+            <button onclick="verifyAge(true)">Yes</button>
+            <button onclick="verifyAge(false)">No</button>
+        </div>
+        <p>Alcohol abuse is dangerous for your health, Do not drink and drive.</p>
+    </div>
+
+    <!-- Main Website Content (hidden until age verification) -->
+    <div id="websiteContent" style="display: none;">
+        <header>
+            <div class="logo-container">
+                <img src="images/brand logo.png" alt="VULTURES Logo" class="logo-img">
+                <div class="logo-text">VULTURES</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="our story.html">Our Story</a></li>
+                    <li><a href="drinks.html">Drinks</a></li>
+                    <li><a href="grape varieties.html">Grape Varieties</a></li>
+                    <li><a href="https://www.champagne.fr/en/about-champagne/how-champagne-is-made">Exploration</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> > <a href="exploration.html">Exploration</a> 
+        </div>
+        
+        <section class="exploration-hero">
+            <video src="images/Champagne_ A History.mp4" autoplay loop muted playsinline width="1400"></video>
+            <div class="hero-content">
+                
+                <p>Discover the taste of  VULTURES experience through our signature blend.</p>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2 class="section-title">Automation</h2>
+            <p>To revolutionize our Champagne estate and ensure sustainable, high-quality production, we are investing in next-generation automation. By 2050, advancements in AI and robotics have transformed agriculture, and we intend to leverage these innovations to maximize efficiency, reduce waste, and enhance the quality of our grapes.
+            </p>
+            
+            <div class="grid-container">
+                <div class="grid-item">
+                    <img src="images/grapes.jpg" alt="VULTURES Grapes">
+                    <div class="grid-content">
+                        <h3>Discover Grape varities</h3>
+                        <p>Discover Diverse Grapes that we use in the production of our Champagne.</p>
+                        <a href="grape varieties.html">Grape Varieties</a>
+                    </div>
+                </div>
+                
+                <div class="grid-item">
+                    <img src="images/champagne tasting.jpg" alt="Champagne Tasting">
+                    <div class="grid-content">
+                        <h3>Sustainability</h3>
+                        <p>By integrating cutting-edge technology with a deep commitment to sustainability, our Champagne estate not only meets the demands of the modern eco-conscious consumer but also sets a new benchmark for the industry.</p>
+                        <a href="sustainability.html">Sustainability</a>
+                    </div>
+                </div>
+                
+                <div class="grid-item">
+                    <img src="images/wulture blanc.jpg" alt="Champagne Label">
+                    <div class="grid-content">
+                        <h3>Products</h3>
+                        <p>How our color palette influences every aspect of the VULTURES experience.</p>
+                        <a href="drinks.html" class="read-more">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="full-width-section">
+            <img src="images/visite-en-champagne.webp" alt="Champagne Experience">
+            <div class="full-width-content">
+                <h2>Experience VULTURES</h2>
+                <p>Visit our vineyards to see how our signature colors come to life in the Champagne region. Book a tour to explore the origins of our distinctive palette.</p>
+                <a href="mailto:champagnevulture@gmail.com">Book a Tour</a>
+            </div>
+        </section>
+        
+        
+                
+                
+        
+        <footer>
+            <div class="footer-logo-container">
+                <img src="images/brand logo.png" alt="VULTURES Logo" class="footer-logo-img">
+                <div class="footer-logo-text">VULTURES</div>
+            </div>
+            <div class="footer-links">
+                <a href="contact.html">Contact</a>
+                <a href="https://www.vinetsociete.fr/consommation-responsable/">Responsible Consumption</a>
+            </div>
+            <div class="copyright">© 2050 VULTURES. All rights reserved.</div>
+        </footer>
+        
+        <!-- AI Chatbot Widget -->
+        <div class="chatbot-container">
+            <button id="chatbot-toggle" class="chatbot-button">
+                <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" alt="AI Assistant" width="30">
+                AI Assistant
+            </button>
+            <div id="chatbot-window" class="chatbot-window">
+                <div class="chatbot-header">
+                    <h3>Champagne AI Assistant</h3>
+                    <button id="chatbot-close" class="close-btn">&times;</button>
+                </div>
+                <div id="chatbot-messages" class="chatbot-messages">
+                    <div class="bot-message">Hello! How can I help you with Champagne today?</div>
+                </div>
+                <div class="chatbot-input">
+                    <input type="text" id="user-input" placeholder="Type your question...">
+                    <button id="send-message">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Age Verification Functionality
+        function verifyAge(isOfAge) {
+            const ageVerification = document.getElementById('ageVerification');
+            const websiteContent = document.getElementById('websiteContent');
+            
+            if (isOfAge) {
+                // User is of legal age - show website
+                ageVerification.style.display = 'none';
+                websiteContent.style.display = 'block';
+                // Set cookie that expires in 1 day
+                document.cookie = "ageVerified=true; max-age=86400; path=/";
+            } else {
+                // User is not of legal age - redirect to Coca-Cola
+                window.location.href = 'https://www.coca-cola.com';
+            }
+        }
+
+        // Check if already verified (optional)
+        function checkAgeVerification() {
+            if (document.cookie.includes('ageVerified=true')) {
+                document.getElementById('ageVerification').style.display = 'none';
+                document.getElementById('websiteContent').style.display = 'block';
+            }
+        }
+
+        // Run check when page loads
+        window.onload = checkAgeVerification;
+
+        // Chatbot functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatbotToggle = document.getElementById('chatbot-toggle');
+            const chatbotWindow = document.getElementById('chatbot-window');
+            const chatbotClose = document.getElementById('chatbot-close');
+            const sendButton = document.getElementById('send-message');
+            const userInput = document.getElementById('user-input');
+            const chatMessages = document.getElementById('chatbot-messages');
+            
+            // Toggle chatbot window
+            chatbotToggle.addEventListener('click', function() {
+                chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+            });
+            
+            // Close chatbot
+            chatbotClose.addEventListener('click', function() {
+                chatbotWindow.style.display = 'none';
+            });
+            
+            // Send message
+            function sendMessage() {
+                const message = userInput.value.trim();
+                if (message) {
+                    // Add user message
+                    const userMessage = document.createElement('div');
+                    userMessage.className = 'user-message';
+                    userMessage.textContent = message;
+                    chatMessages.appendChild(userMessage);
+                    
+                    // Clear input
+                    userInput.value = '';
+                    
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    
+                    // Simulate bot response
+                    setTimeout(() => {
+                        const botResponse = document.createElement('div');
+                        botResponse.className = 'bot-message';
+                        botResponse.textContent = getBotResponse(message);
+                        chatMessages.appendChild(botResponse);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 1000);
+                }
+            }
+            
+            // Simple response logic
+            function getBotResponse(message) {
+                const lowerMessage = message.toLowerCase();
+                
+                if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+                    return "Hello there! How can I assist you with VULTURES Champagne today?";
+                } else if (lowerMessage.includes('color') || lowerMessage.includes('palette')) {
+                    return "Our signature colors are #144734 (dark green) representing our vineyards and #ffc51a (golden yellow) representing our champagne. Would you like more details?";
+                } else if (lowerMessage.includes('visit') || lowerMessage.includes('tour')) {
+                    return "We offer tours of our vineyards Monday-Friday. You can book through our website or contact us directly.";
+                } else if (lowerMessage.includes('product') || lowerMessage.includes('champagne')) {
+                    return "We offer several champagne varieties. Our most popular is the VULTURES Grand Cru. Would you like information about our product line?";
+                } else {
+                    return "Thank you for your question! For more detailed information about VULTURES, please visit our website or contact our customer service.";
+                }
+            }
+            
+            // Send message on button click or Enter key
+            sendButton.addEventListener('click', sendMessage);
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
